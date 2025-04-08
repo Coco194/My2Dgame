@@ -8,12 +8,15 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 			JFrame window = new JFrame();
+			GamePanel gamePanel = new GamePanel();
+			
 			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			window.setResizable(false);
 			window.setTitle("2D adventure");
 			window.setVisible(true);
 			
-			GamePanel gamePanel = new GamePanel();
+			
+			
 			window.add(gamePanel);
 			
 			window.pack();
