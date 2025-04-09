@@ -45,40 +45,34 @@ public class TileManager {
 	}
 	
 	public void loadMap() {
-		
-		try {
-			
-			// reads the raw bytes from the gameMap file
-			// converts the raw bytes to characters using InputStreamReader 			
-			InputStream is = getClass().getResourceAsStream("/maps/gameMap");
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-			
-			int col = 0;
-			int row = 0;
-			
-			while(col < gp.maxScreenCol && row < gp.maxScreenRow) {
-				String line = br.readLine();
-				
-				while(col < gp.maxScreenCol) {
-					System.out.println("Reading line: " + line);
+	    try {
+	    	
+	    	// reads the raw bytes from the gameMap file
+	    	// converts the raw bytes to characters using InputStreamReader 		
+	        InputStream is = getClass().getResourceAsStream("/maps/gameMap");
+	        BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-					String numbers[] = line.split(" ");
-					
-					int num = Integer.parseInt(numbers[col]);
-					
-					mapTileNum[col][row] = num;
-					col++;
-				}
-				if(col == gp.maxScreenCol) {
-					col = 0;
-					row++;
-				}
-			}
-			br.close();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+	        int row = 0;
+
+	        String line;
+	        while (row < gp.maxScreenRow && (line = br.readLine()) != null) {  
+	            System.out.println("Reading line: " + line); 
+
+	            String numbers[] = line.split(" "); 
+
+	            for (int col = 0; col < gp.maxScreenCol; col++) {  
+	                mapTileNum[col][row] = Integer.parseInt(numbers[col]);
+	            }
+	            
+	            // Move to the next row
+	            row++; 
+	        }
+	        br.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
+
 	
 	public void draw(Graphics2D g2) {
 		
